@@ -3435,6 +3435,10 @@ module RbReadline
             @cpos_buffer_position = out
             lb_linenum = newlines
           end
+
+          # fast hack for utf-8 console encoding
+          line.force_encoding(@rl_line_buffer[_in,wc_bytes].encoding)
+
           line[out,wc_bytes] = @rl_line_buffer[_in,wc_bytes]
           out += wc_bytes
           for i in 0 ... wc_width
